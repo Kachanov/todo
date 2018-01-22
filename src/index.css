@@ -23,3 +23,8 @@ h2{
   font-size: 24pt;
   margin-left: 20px;
 }
+
+ul {
+  font-family: Monaco;
+  font-size: 16pt;
+}
