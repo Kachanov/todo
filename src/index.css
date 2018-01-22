@@ -2,29 +2,71 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background: #fffdb5;
+  background: #f5f5f5;
+}
+
+@font-face {
+  font-family: "BuildingFont";
+  src: url("./font/Building_Typeface.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
 }
 
 .input {
+  font-family: BuildingFont;
+  font-size: 20pt;
+  text-transform: uppercase;
   margin-left: 20px;
   margin-top: 20px;
   margin-right: 10px;
   height: 30px;
-  width: 150px;
+  width: 200px;
+  background: #ffffff;
 }
 
-.addButton {
-  height: 35px;
-  width: 40px;
+.addButton  {
+  width: 100px;
+  font-weight: 700;
+  color: white;
+  text-decoration: none;
+  padding: .8em 1em calc(.8em + 3px);
+  border-radius: 3px;
+  background: rgb(64,199,129);
+  box-shadow: 0 -3px rgb(53,167,110) inset;
+  transition: 0.2s;
+  height: 38px;
+}
+.addButton:hover {
+  background: rgb(53, 167, 110);
+}
+
+.addButton:active {
+  background: rgb(33,147,90);
+  box-shadow: 0 3px rgb(33,147,90) inset;
 }
 
 h2{
-  font-family: Monaco;
-  font-size: 24pt;
+  font-family: BuildingFont;
+  font-size: 50pt;
   margin-left: 20px;
 }
 
-ul {
-  font-family: Monaco;
-  font-size: 16pt;
+.todoList {
+  margin: 20px;
+  width: 305px;
+  vertical-align: middle;
+  background: white;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
+
+.todoItem {
+  font-family: BuildingFont;
+  font-size: 20pt;
+  text-transform: uppercase;
+  padding: 2px;
+  width: 300px;
+  height: 30px;
+  border: 1px solid #f5f5f5;
+  text-align: justify;
+}
+

@@ -10,41 +10,42 @@ class Todo extends React.Component {
     }
 
     handleChange = (event) => {
-        this.setState({item: event.currentTarget.value});
+        this.setState({item: event.target.value.toUpperCase()});
         console.log(event.currentTarget.value);
     };
 
-    handleClick = (event) => {
+    addTodo() {
         var input = document.getElementById("input");
         if(input.value) {
             this.setState({todoArray: [...this.state.todoArray, input.value]});
         }
         console.log(this.state.todoArray);
         input.value = "";
+    }
+
+    handleClick = (event) => {
+        this.addTodo();
     };
 
     handleEnter = (event) => {
         if(event.keyCode === 13){
-            var input = document.getElementById("input");
-            if(input.value) {
-                this.setState({todoArray: [...this.state.todoArray, input.value]});
-            }
-            console.log(this.state.todoArray);
-            input.value = "";
+            this.addTodo();
         }
     };
 
     render() {
         return(
             <div>
-                <h2>Todo App</h2>
+                <h2>TODO APP</h2>
                 <input onChange={this.handleChange} className="input" id="input" onKeyUp={this.handleEnter} />
                 <button onClick={this.handleClick} className="addButton" id="addButton">Add</button>
-                <ul>{
+                <div className="todoList">{
                     this.state.todoArray.map((item) =>
-                        <li>{item}</li>
+                        <div className="todoItem">
+                            {item}
+                        </div>
                     )
-                }</ul>
+                }</div>
             </div>
         );
     }
