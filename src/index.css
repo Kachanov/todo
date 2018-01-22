@@ -77,4 +77,6 @@ h2{
 .deleteButton {
   margin-right: 10px;
   color: red;
+  cursor: pointer;
+  user-select: none;
 }
