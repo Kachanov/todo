@@ -34,8 +34,14 @@ class Todo extends React.Component {
         }
     };
 
-    handleReady = (a,b) => {
-      console.log(a,b);
+    handleReady = (index) => {
+      console.log(index);
+      console.log(typeof this.state.todoArray);
+      let tempArray = this.state.todoArray.splice(index, 1);
+
+      this.setState({todoArray: this.state.todoArray});
+      console.log(this.state.todoArray);
+      console.log(tempArray);
     };
 
     render() {
