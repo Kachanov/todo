@@ -2,12 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-let todoList = [];
+class Todo extends React.Component {
 
-class Input extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {item: ""};
+        this.state = {item: props.value, todoArray: []};
     }
 
     handleChange = (event) => {
@@ -16,22 +15,31 @@ class Input extends React.Component {
     };
 
     handleClick = (event) => {
-        todoList.push(this.state.item);
-        console.log(todoList);
         var input = document.getElementById("input");
+        if(input.value) {
+            this.setState({todoArray: [...this.state.todoArray, input.value]});
+        }
+        console.log(this.state.todoArray);
         input.value = "";
     };
 
     render() {
         return(
             <div>
+                <h2>Todo App</h2>
                 <input onChange={this.handleChange} className="input" id="input"/>
-                <button onClick={this.handleClick} className="addButton" id="addButton"> Add </button>
+                <button onClick={this.handleClick} className="addButton" id="addButton">Add</button>
+                <ul>{
+                    this.state.todoArray.map((item) =>
+                        <li>{item}</li>
+                    )
+                }</ul>
             </div>
         );
     }
 
-
 }
 
-ReactDOM.render(<Input />, document.getElementById('root'));
+ReactDOM.render(<Todo value=""/>, document.getElementById('root'));
+
+
