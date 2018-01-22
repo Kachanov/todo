@@ -19,6 +19,7 @@ class Todo extends React.Component {
         if(input.value) {
             this.setState({todoArray: [...this.state.todoArray, input.value]});
         }
+
         console.log(this.state.todoArray);
         input.value = "";
     }
@@ -43,6 +44,9 @@ class Todo extends React.Component {
                     this.state.todoArray.map((item) =>
                         <div className="todoItem">
                             {item}
+                            <div className="deleteButton">
+                                X
+                            </div>
                         </div>
                     )
                 }</div>

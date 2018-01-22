@@ -60,6 +60,10 @@ h2{
 }
 
 .todoItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
   font-family: BuildingFont;
   font-size: 20pt;
   text-transform: uppercase;
@@ -70,3 +74,7 @@ h2{
   text-align: justify;
 }
 
+.deleteButton {
+  margin-right: 10px;
+  color: red;
+}
