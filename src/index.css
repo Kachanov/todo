@@ -74,9 +74,27 @@ h2{
   text-align: justify;
 }
 
+.todoControlButtons{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 40px;
+}
+
 .deleteButton {
   margin-right: 10px;
   color: red;
   cursor: pointer;
   user-select: none;
+  margin-top: 6px;
 }
+
+.readyButton {
+  color: greenyellow;
+  cursor: pointer;
+  user-select: none;
+  font-size: 23pt;
+  margin-right: 5px;
+}
+
+

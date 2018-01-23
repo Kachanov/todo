@@ -7,6 +7,10 @@ class Todo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {item: props.value, todoArray: [], id: 0};
+        this.defaultTodoItem = {
+            value: "",
+            done: false
+        }
     }
 
     handleChange = (event) => {
@@ -17,7 +21,16 @@ class Todo extends React.Component {
     addTodo() {
         var input = document.getElementById("input");
         if(input.value) {
-            this.setState({todoArray: [...this.state.todoArray, input.value], id: this.state.todoArray.length});
+            this.setState({
+                todoArray: [...this.state.todoArray,
+                    {
+                        ...this.defaultTodoItem,
+                        value: input.value
+                    }],
+
+
+                id: this.state.todoArray.length
+            });
         }
 
         console.log(this.state.todoArray);
@@ -51,14 +64,26 @@ class Todo extends React.Component {
                 <input onChange={this.handleChange} className="input" id="input" onKeyUp={this.handleEnter} />
                 <button onClick={this.handleClick} className="addButton" id="addButton">Add</button>
                 <div className="todoList">{
-                    this.state.todoArray.map((todoName, index) =>
-                        <div className="todoItem" key={index}>
+/*
+                    this.state.todoArray.map( (todoName, index) => {
+*/
+                        this.state.todoArray.filter(function (item, index) {
+                            return item.done === true
+                        }).map( (todoName, index) => {
+                        return <div className="todoItem" key={index}>
                             {todoName}
-                            <div className="deleteButton" onClick={() => {this.handleReady(index)} }>
-                                X
+                            <div className="todoControlButtons">
+                                <div className="readyButton">
+                                    ✓
+                                </div>
+                                <div className="deleteButton" onClick={() => {
+                                    this.handleReady(index)
+                                }}>
+                                    X
+                                </div>
                             </div>
                         </div>
-                    )
+                    })
                 }</div>
             </div>
         );
