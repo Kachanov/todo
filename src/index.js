@@ -28,7 +28,6 @@ class Todo extends React.Component {
                         value: input.value
                     }],
 
-
                 id: this.state.todoArray.length
             });
         }
@@ -47,7 +46,7 @@ class Todo extends React.Component {
         }
     };
 
-    handleReady = (index) => {
+    handleDelete = (index) => {
       console.log(index);
       console.log(typeof this.state.todoArray);
       let tempArray = this.state.todoArray.splice(index, 1);
@@ -64,20 +63,17 @@ class Todo extends React.Component {
                 <input onChange={this.handleChange} className="input" id="input" onKeyUp={this.handleEnter} />
                 <button onClick={this.handleClick} className="addButton" id="addButton">Add</button>
                 <div className="todoList">{
-/*
-                    this.state.todoArray.map( (todoName, index) => {
-*/
-                        this.state.todoArray.filter(function (item, index) {
-                            return item.done === true
-                        }).map( (todoName, index) => {
+                    this.state.todoArray.filter(function (item) {
+                        return item.done === false
+                    }).map( (item, index) => {
                         return <div className="todoItem" key={index}>
-                            {todoName}
+                            {item.value}
                             <div className="todoControlButtons">
                                 <div className="readyButton">
                                     ✓
                                 </div>
                                 <div className="deleteButton" onClick={() => {
-                                    this.handleReady(index)
+                                    this.handleDelete(index);
                                 }}>
                                     X
                                 </div>
