@@ -47,12 +47,14 @@ class Todo extends React.Component {
     handleDelete = (item) => {
         let index = item.id;
         console.log(index);
+
         console.log(typeof this.state.todoArray);
-        let tempArray = this.state.todoArray.splice(index, 1);
+        this.state.todoArray[index] = {};
+        //delete this.state.todoArray[index];
 
         this.setState({todoArray: this.state.todoArray});
         console.log(this.state.todoArray);
-        console.log(tempArray);
+        //console.log(tempArray);
     };
 
 
