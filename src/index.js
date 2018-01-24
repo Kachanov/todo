@@ -16,7 +16,6 @@ class Todo extends React.Component {
 
     handleChange = (event) => {
         this.setState({item: event.target.value.toUpperCase()});
-        console.log(event.currentTarget.value);
     };
 
     addTodo() {
@@ -45,15 +44,17 @@ class Todo extends React.Component {
         }
     };
 
-    handleDelete = (index) => {
-      console.log(index);
-      console.log(typeof this.state.todoArray);
-      let tempArray = this.state.todoArray.splice(index, 1);
+    handleDelete = (item) => {
+        let index = item.id;
+        console.log(index);
+        console.log(typeof this.state.todoArray);
+        let tempArray = this.state.todoArray.splice(index, 1);
 
-      this.setState({todoArray: this.state.todoArray});
-      console.log(this.state.todoArray);
-      console.log(tempArray);
+        this.setState({todoArray: this.state.todoArray});
+        console.log(this.state.todoArray);
+        console.log(tempArray);
     };
+
 
     handleReady = (item) => {
         const index = item.id;
@@ -70,7 +71,6 @@ class Todo extends React.Component {
 
 
 
-
     render() {
         return(
             <div>
@@ -80,8 +80,8 @@ class Todo extends React.Component {
                 <div className="todoList">{
                     this.state.todoArray.filter(function (item) {
                         return item.done === false
-                    }).map( (item, index) => {
-                        return <div className="todoItem" key={index}>
+                    }).map( (item) => {
+                        return <div className="todoItem" key={item.id}>
                             {item.value}
                             <div className="todoControlButtons">
                                 <div className="readyButton" onClick={() => {
@@ -90,7 +90,7 @@ class Todo extends React.Component {
                                     ✓
                                 </div>
                                 <div className="deleteButton" onClick={() => {
-                                    this.handleDelete(index);
+                                    this.handleDelete(item);
                                 }}>
                                     X
                                 </div>
