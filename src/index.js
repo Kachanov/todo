@@ -57,6 +57,7 @@ class Todo extends React.Component {
 
     handleReady = (item) => {
         const index = item.id;
+        console.log(index);
         this.state.todoArray.splice(index, 1, {...this.state.todoArray[index], done: true});
 
         this.setState({
@@ -65,7 +66,7 @@ class Todo extends React.Component {
         });
 
         console.log(this.state.todoArray);
-    }
+    };
 
 
 
