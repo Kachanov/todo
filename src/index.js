@@ -6,10 +6,11 @@ class Todo extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {item: props.value, todoArray: [], id: 0};
+        this.state = {item: props.value, todoArray: []};
         this.defaultTodoItem = {
             value: "",
-            done: false
+            done: false,
+            id: 0
         };
     }
 
@@ -25,10 +26,8 @@ class Todo extends React.Component {
                 todoArray: [...this.state.todoArray,
                     {
                         ...this.defaultTodoItem,
-                        value: input.value
-                    }],
-
-                id: this.state.todoArray.length
+                        value: input.value, id: this.defaultTodoItem.id++
+                    }]
             });
         }
 
@@ -57,24 +56,9 @@ class Todo extends React.Component {
     };
 
     handleReady = (index) => {
-       /* const newArr = this.state.todoArray.map((item, i) => index === i ? ({
-            ...item,
-            done: true
-        }) : item);
-
-        const a = "123"
-        const b = [1,2,3]
-        const c = b
-        c === b
-
-        c[0] = 2
-        b[0] === 2
-*/
-
         this.state.todoArray.splice(index, 1, {...this.state.todoArray[index], done: true});
         this.setState({
             todoArray: [...this.state.todoArray],
-
             id: this.state.todoArray.length
         });
 
@@ -111,6 +95,17 @@ class Todo extends React.Component {
                         </div>
                     })
                 }</div>
+                <div className="navigation">
+                    <p className="currentTodos">
+                        CURRENT
+                    </p>
+                    <p className="doneTodos">
+                        DONE
+                    </p>
+                    <p className="allTodos">
+                        ALL
+                    </p>
+                </div>
             </div>
         );
     }

@@ -97,4 +97,27 @@ h2{
   margin-right: 5px;
 }
 
+.navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 150px;
+  margin-left: 95px;
+  margin-top: -20px;
+  font-family: BuildingFont;
+  font-size: 18pt;
+  color: red;
+}
+
+.currentTodos {
+  cursor: pointer;
+}
+
+.doneTodos {
+  cursor: pointer;
+}
+
+.allTodos {
+  cursor: pointer;
+}
 
