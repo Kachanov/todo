@@ -55,15 +55,17 @@ class Todo extends React.Component {
       console.log(tempArray);
     };
 
-    handleReady = (index) => {
+    handleReady = (item) => {
+        const index = item.id;
         this.state.todoArray.splice(index, 1, {...this.state.todoArray[index], done: true});
+
         this.setState({
             todoArray: [...this.state.todoArray],
             id: this.state.todoArray.length
         });
 
         console.log(this.state.todoArray);
-    };
+    }
 
 
 
@@ -82,7 +84,7 @@ class Todo extends React.Component {
                             {item.value}
                             <div className="todoControlButtons">
                                 <div className="readyButton" onClick={() => {
-                                    this.handleReady(index);
+                                    this.handleReady(item);
                                 }}>
                                     ✓
                                 </div>
