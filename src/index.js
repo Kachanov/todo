@@ -19,7 +19,7 @@ class Todo extends React.Component {
     };
 
     addTodo() {
-        var input = document.getElementById("input");
+        const input = document.getElementById("input");
         if(input.value) {
             this.setState({
                 todoArray: [...this.state.todoArray,
@@ -29,8 +29,6 @@ class Todo extends React.Component {
                     }]
             });
         }
-
-        console.log(this.state.todoArray);
         input.value = "";
     }
 
@@ -46,31 +44,19 @@ class Todo extends React.Component {
 
     handleDelete = (item) => {
         let index = item.id;
-        console.log(index);
-
-        console.log(typeof this.state.todoArray);
-
-        //this.state.todoArray[index] = {};
-
         const items = this.state.todoArray;
         items[index] = {};
-
         this.setState({todoArray: this.state.todoArray});
-        console.log(this.state.todoArray);
-        //console.log(tempArray);
     };
 
     handleReady = (item) => {
         const index = item.id;
-        console.log(index);
         this.state.todoArray.splice(index, 1, {...this.state.todoArray[index], done: true});
 
         this.setState({
             todoArray: [...this.state.todoArray],
             id: this.state.todoArray.length
         });
-
-        console.log(this.state.todoArray);
     };
 
     showCurrentTodos = () => {
@@ -78,9 +64,6 @@ class Todo extends React.Component {
             status: false,
             all: false
         });
-
-        this.render(this.state.status);
-        console.log(this.state.status);
     };
 
     showDoneTodos = () => {
@@ -88,9 +71,6 @@ class Todo extends React.Component {
             status: true,
             all: false
         });
-
-        this.render(this.state.status);
-        console.log(this.state.status);
     };
 
     showAllTodos = () => {
@@ -99,10 +79,7 @@ class Todo extends React.Component {
          });
     };
 
-
     render() {
-        let whatToShow = this.state.status;
-        //console.log(status);
         return(
             <div>
                 <h2>TODO APP</h2>
@@ -111,7 +88,7 @@ class Todo extends React.Component {
                 <div className="todoList">{
                     this.state.todoArray.filter( (item) => {
                         if(this.state.all === false) {
-                            return item.done === whatToShow
+                            return item.done === this.state.status
                         }else{
                             console.log(this.state.all);
                             return item.done === true || item.done === false
