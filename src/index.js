@@ -49,8 +49,11 @@ class Todo extends React.Component {
         console.log(index);
 
         console.log(typeof this.state.todoArray);
-        this.state.todoArray[index] = {};
-        //delete this.state.todoArray[index];
+
+        //this.state.todoArray[index] = {};
+
+        const items = this.state.todoArray;
+        items[index] = {};
 
         this.setState({todoArray: this.state.todoArray});
         console.log(this.state.todoArray);
