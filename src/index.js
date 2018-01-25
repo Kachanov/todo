@@ -93,7 +93,7 @@ class Todo extends React.Component {
                             console.log(this.state.all);
                             return item.done === true || item.done === false
                         }
-                    }).map( (item) => {          
+                    }).map( (item) => {                                                    
                         return <div className="todoItem" key={item.id}>
                             {item.value}
                             <div className="todoControlButtons">
