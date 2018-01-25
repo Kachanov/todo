@@ -1,6 +1,7 @@
 {
   "name": "@kachanov_b/todo",
   "version": "1.0.0",
+  "description": "Todo ReactJS",
   "private": false,
   "dependencies": {
     "react": "^16.2.0",
