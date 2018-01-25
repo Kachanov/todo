@@ -107,6 +107,7 @@ h2{
   font-family: BuildingFont;
   font-size: 18pt;
   color: red;
+  user-select: none;
 }
 
 .currentTodos {

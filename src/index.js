@@ -74,27 +74,27 @@ class Todo extends React.Component {
     };
 
     showCurrentTodos = () => {
-        this.setState( (prevState) => {
-            return {
-                status: !prevState.status
-            }
+        this.setState({
+            status: false
         });
+
         this.render(this.state.status);
         console.log(this.state.status);
     };
 
     showDoneTodos = () => {
-        this.setState( (prevState) => {
-            return {
-                status: !prevState.status
-            }
+        this.setState({
+            status: true
         });
+
         this.render(this.state.status);
         console.log(this.state.status);
     };
 
     showAllTodos = () => {
-
+         this.setState({
+             
+         });
     };
 
 
