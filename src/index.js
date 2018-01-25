@@ -6,7 +6,7 @@ class Todo extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {item: props.value, todoArray: []};
+        this.state = {item: props.value, todoArray: [], status: false};
         this.defaultTodoItem = {
             value: "",
             done: false,
@@ -60,7 +60,6 @@ class Todo extends React.Component {
         //console.log(tempArray);
     };
 
-
     handleReady = (item) => {
         const index = item.id;
         console.log(index);
@@ -74,9 +73,34 @@ class Todo extends React.Component {
         console.log(this.state.todoArray);
     };
 
+    showCurrentTodos = () => {
+        this.setState( (prevState) => {
+            return {
+                status: !prevState.status
+            }
+        });
+        this.render(this.state.status);
+        console.log(this.state.status);
+    };
+
+    showDoneTodos = () => {
+        this.setState( (prevState) => {
+            return {
+                status: !prevState.status
+            }
+        });
+        this.render(this.state.status);
+        console.log(this.state.status);
+    };
+
+    showAllTodos = () => {
+
+    };
 
 
     render() {
+        let whatToShow = this.state.status;
+        //console.log(status);
         return(
             <div>
                 <h2>TODO APP</h2>
@@ -84,7 +108,7 @@ class Todo extends React.Component {
                 <button onClick={this.handleClick} className="addButton" id="addButton">Add</button>
                 <div className="todoList">{
                     this.state.todoArray.filter(function (item) {
-                        return item.done === false
+                        return item.done === whatToShow
                     }).map( (item) => {
                         return <div className="todoItem" key={item.id}>
                             {item.value}
@@ -104,13 +128,19 @@ class Todo extends React.Component {
                     })
                 }</div>
                 <div className="navigation">
-                    <p className="currentTodos">
+                    <p className="currentTodos" onClick={() => {
+                        this.showCurrentTodos();
+                    }}>
                         CURRENT
                     </p>
-                    <p className="doneTodos">
+                    <p className="doneTodos" onClick={() => {
+                        this.showDoneTodos();
+                    }}>
                         DONE
                     </p>
-                    <p className="allTodos">
+                    <p className="allTodos" onClick={() => {
+                        this.showAllTodos();
+                    }}>
                         ALL
                     </p>
                 </div>
