@@ -6,7 +6,7 @@ class Todo extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {item: props.value, todoArray: [], status: false};
+        this.state = {item: props.value, todoArray: [], status: false, all: false};
         this.defaultTodoItem = {
             value: "",
             done: false,
@@ -75,7 +75,8 @@ class Todo extends React.Component {
 
     showCurrentTodos = () => {
         this.setState({
-            status: false
+            status: false,
+            all: false
         });
 
         this.render(this.state.status);
@@ -84,7 +85,8 @@ class Todo extends React.Component {
 
     showDoneTodos = () => {
         this.setState({
-            status: true
+            status: true,
+            all: false
         });
 
         this.render(this.state.status);
@@ -93,7 +95,7 @@ class Todo extends React.Component {
 
     showAllTodos = () => {
          this.setState({
-             
+              all: true
          });
     };
 
@@ -107,9 +109,14 @@ class Todo extends React.Component {
                 <input onChange={this.handleChange} className="input" id="input" onKeyUp={this.handleEnter} />
                 <button onClick={this.handleClick} className="addButton" id="addButton">Add</button>
                 <div className="todoList">{
-                    this.state.todoArray.filter(function (item) {
-                        return item.done === whatToShow
-                    }).map( (item) => {
+                    this.state.todoArray.filter( (item) => {
+                        if(this.state.all === false) {
+                            return item.done === whatToShow
+                        }else{
+                            console.log(this.state.all);
+                            return item.done === true || item.done === false
+                        }
+                    }).map( (item) => {          
                         return <div className="todoItem" key={item.id}>
                             {item.value}
                             <div className="todoControlButtons">
