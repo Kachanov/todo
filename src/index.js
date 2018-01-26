@@ -79,6 +79,15 @@ class Todo extends React.Component {
          });
     };
 
+    showTodo = (item) => {
+      const maxLength = 19;
+
+      if(item.value.length > maxLength) {
+          return <div>{item.value.slice(0, maxLength - 3) + "..."}</div>
+      }
+          return <div>{item.value}</div>
+    };
+
     render() {
         return(
             <div>
@@ -95,7 +104,7 @@ class Todo extends React.Component {
                         }
                     }).map( (item) => {                                                    
                         return <div className="todoItem" key={item.id}>
-                            {item.value}
+                            {this.showTodo(item)}
                             <div className="todoControlButtons">
                                 <div className="readyButton" onClick={() => {
                                     this.handleReady(item);
