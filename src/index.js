@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+var selectedItem;
+
 class Todo extends React.Component {
 
     constructor(props) {
@@ -89,6 +91,28 @@ class Todo extends React.Component {
           return <div>{item.value}</div>
     };
 
+    toggleNavigation = (event) => {
+        let target = event.target;
+
+        while(target !== this) {
+            if(target.tagName === "P") {
+                highlight(target);
+                return;
+            }
+            target = target.parentNode;
+        }
+
+        function highlight(node) {
+            if(selectedItem) {
+                selectedItem.classList.remove("highlight");
+            }
+            selectedItem = node;
+            selectedItem.classList.add("highlight");
+        }
+
+    };
+
+
 
 
     render() {
@@ -126,7 +150,7 @@ class Todo extends React.Component {
                             </div>
                     }})
                 }</div>
-                <div className="navigation">
+                <div className="navigation" onClick={this.toggleNavigation}>
                     <p className="currentTodos" onClick={() => {
                         this.showCurrentTodos();
                     }}>

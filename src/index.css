@@ -150,3 +150,7 @@ h2{
   text-align: justify;
   white-space: nowrap;
 }
+
+.highlight {
+  text-decoration: underline red;
+}
