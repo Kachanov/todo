@@ -106,22 +106,25 @@ class Todo extends React.Component {
                             return item.done === true || item.done === false
                         }
                     }).map( (item) => {
-                        return <div className="todoItem" key={item.id} id="todoItem">
-                            {this.showTodo(item)}
-                            <div className="todoControlButtons">
-                                <div className="readyButton" onClick={() => {
-                                    this.handleReady(item);
-                                }}>
-                                    ✓
-                                </div>
-                                <div className="deleteButton" onClick={() => {
-                                    this.handleDelete(item);
-                                }}>
-                                    X
+                        if(item.done === true){
+                            return <div className="crossOut">{this.showTodo(item)}</div>
+                        }else{
+                            return <div className="todoItem" key={item.id} id="todoItem">
+                                {this.showTodo(item)}
+                                <div className="todoControlButtons">
+                                    <div className="readyButton" onClick={() => {
+                                        this.handleReady(item);
+                                    }}>
+                                        ✓
+                                    </div>
+                                    <div className="deleteButton" onClick={() => {
+                                        this.handleDelete(item);
+                                    }}>
+                                        X
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    })
+                    }})
                 }</div>
                 <div className="navigation">
                     <p className="currentTodos" onClick={() => {
