@@ -94,8 +94,8 @@ class Todo extends React.Component {
     toggleNavigation = (event) => {
         let target = event.target;
 
-        while(target != this) {
-            if(target.tagName == "P") {
+        while(target !== this) {
+            if(target.tagName === "P") {
                 highlight(target);
                 return;
             }
