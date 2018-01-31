@@ -21,10 +21,20 @@ export function todoList(state = initialState, action) {
     if(action.type === "DELETE_TODO") {
         let index = action.payload;
         state.todoArray[index] = {};
+
         return {
             ...state, todoArray: [...state.todoArray]
         }
 
+    }
+
+    if(action.type === "DONE_TODO") {
+        let index = action.payload;
+        state.todoArray[index].done = true;
+
+        return {
+            ...state, todoArray: [...state.todoArray]
+        }
     }
 
     return state;
