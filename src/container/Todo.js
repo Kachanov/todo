@@ -2,41 +2,37 @@ import React from "react";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import {addTodo} from "../actions/todo.action";
+import {deleteTodo} from "../actions/todo.action";
 
 export class Todo extends React.Component {
 
+    componentDidMount() {
+        console.log("componentWillMount")
+    }
+
+    componentWillUnmount() {
+        console.log("componentWillUnmount")
+    }
+
+
+
+
     constructor(props) {
         super(props);
-        /*this.state = {item: props.value, todoArray: [], status: false, all: false};
-        this.defaultTodoItem = {
-            value: "",
-            done: false,
-            id: 0,
-        };*/
-        this.state = {item: props.value, localState: props.store, status: false, all: false};
-        this.defaultTodoItem = {
-            value: "",
-            done: false,
-            id: 0,
-        }
+        this.state = {item: props.value, todoArray: props.store.todoArray, currentFilter: props.store.currentFilter, status: false, all: false};
     }
 
     handleChange = (event) => {
-        this.setState({item: event.target.value.toUpperCase()});
+        //this.setState({item: event.target.value.toUpperCase()});
+        event.target.value.toUpperCase();
     };
 
     addTodo() {
         const input = document.getElementById("input");
         if(input.value) {
-            /*this.setState({
-                todoArray: [...this.state.todoArray,
-                    {
-                        ...this.defaultTodoItem,
-                        value: input.value, id: this.defaultTodoItem.id++
-                    }]
-            });*/
             this.props.addTodo(input.value);
         }
+
         input.value = "";
         console.log(this.props.store);
     }
@@ -51,23 +47,42 @@ export class Todo extends React.Component {
         }
     };
 
-    /*handleDelete = (item) => {
+    handleDelete = (item) => {
         let index = item.id;
-        const items = this.state.todoArray;
-        items[index] = {};
-        this.setState({todoArray: this.state.todoArray});
+        //const items = this.props.store.todoArray;
+        /*items[index] = {};
+        this.setState({todoArray: this.props.store.todoArray});*/
+        this.props.deleteTodo(index);
+        console.log(this.props.store);
     };
+
 
     handleReady = (item) => {
         const index = item.id;
-        this.state.todoArray.splice(index, 1, {...this.state.todoArray[index], done: true});
+        //this.state.todoArray.splice(index, 1, {...this.state.todoArray[index], done: true});
+        //this.props.store.todoArray[index].done = true;
 
-        this.setState({
+
+        /*let newTodoArray = this.props.store.todoArray.slice();
+        this.props.store.todoArray = newTodoArray;*/
+        let newTodoArray = this.props.store.todoArray.slice();
+        newTodoArray[index].done = true;
+
+
+
+       /* var a = [1,2,3]*/
+       /* var b = a.slice();*/
+       /* b.push(4);*/
+       /* console.log(b)*/
+       /* console.log(a)*/
+
+        /*this.setState({
             todoArray: [...this.state.todoArray],
             id: this.state.todoArray.length
-        });
+        });*/
     };
 
+    /*
     showCurrentTodos = () => {
         this.setState({
             status: false,
@@ -123,13 +138,14 @@ export class Todo extends React.Component {
 
 
     render() {
+        console.log("RENDER");
         return(
             <div>
                 <h2>TODO APP</h2>
                 <input onChange={this.handleChange} className="input" id="input" onKeyUp={this.handleEnter} />
                 <button onClick={this.handleClick} className="addButton" id="addButton">Add</button>
-                {/*<div className="todoList">{
-                    this.props.testStore.filter( (item) => {
+                <div className="todoList">{
+                    this.props.store.todoArray.filter( (item) => {
                         if(this.state.all === false) {
                             return item.done === this.state.status
                         }else{
@@ -142,6 +158,7 @@ export class Todo extends React.Component {
                         }else{
                             return <div className="todoItem" key={item.id} id="todoItem">
                                 {this.showTodo(item)}
+                                    {this.componentDidMount()}
                                 <div className="todoControlButtons">
                                     <div className="readyButton" onClick={() => {
                                         this.handleReady(item);
@@ -150,13 +167,14 @@ export class Todo extends React.Component {
                                     </div>
                                     <div className="deleteButton" onClick={() => {
                                         this.handleDelete(item);
+                                        this.componentWillUnmount();
                                     }}>
                                         X
                                     </div>
                                 </div>
                             </div>
                         }})
-                }</div>*/}
+                }</div>
                 <div className="navigation" onClick={this.toggleNavigation}>
                     <p className="currentTodos" onClick={() => {
                         this.showCurrentTodos();
@@ -185,6 +203,7 @@ export default connect(
         store: state
     }),
     dispatch => bindActionCreators({
-        addTodo: addTodo
+        addTodo: addTodo,
+        deleteTodo: deleteTodo
     }, dispatch)
 )(Todo);

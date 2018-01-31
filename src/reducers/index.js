@@ -18,5 +18,14 @@ export function todoList(state = initialState, action) {
         }
     }
 
+    if(action.type === "DELETE_TODO") {
+        let index = action.payload;
+        state.todoArray[index] = {};
+        return {
+            ...state, todoArray: [...state.todoArray]
+        }
+
+    }
+
     return state;
 }
