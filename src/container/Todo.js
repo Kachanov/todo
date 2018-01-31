@@ -1,6 +1,7 @@
-import {bindActionCreators} from "redux/index";
-import * as actions from "../actions/todo.action";
+import React from "react";
+import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
+import {addTodo} from "../actions/todo.action";
 
 export class Todo extends React.Component {
 
@@ -12,15 +13,16 @@ export class Todo extends React.Component {
             done: false,
             id: 0,
         };*/
-
+        this.state = {item: props.value, localState: props.store, status: false, all: false};
+        this.defaultTodoItem = {
+            value: "",
+            done: false,
+            id: 0,
+        }
     }
 
     handleChange = (event) => {
-        /*this.setState({item: event.target.value.toUpperCase()});*/
-        this.props.addTodo({
-            value: event.target.value.toUpperCase(),
-
-        });
+        this.setState({item: event.target.value.toUpperCase()});
     };
 
     addTodo() {
@@ -33,9 +35,10 @@ export class Todo extends React.Component {
                         value: input.value, id: this.defaultTodoItem.id++
                     }]
             });*/
-            //this.props.testStore = [...this.props.testStore, value]
+            this.props.addTodo(input.value);
         }
         input.value = "";
+        console.log(this.props.store);
     }
 
     handleClick = (event) => {
@@ -48,7 +51,7 @@ export class Todo extends React.Component {
         }
     };
 
-    handleDelete = (item) => {
+    /*handleDelete = (item) => {
         let index = item.id;
         const items = this.state.todoArray;
         items[index] = {};
@@ -84,7 +87,7 @@ export class Todo extends React.Component {
         this.setState({
             all: true
         });
-    };
+    };*/
 
     showTodo = (item) => {
         const maxLength = 18;
@@ -95,7 +98,7 @@ export class Todo extends React.Component {
         return <div>{item.value}</div>
     };
 
-    toggleNavigation = (event) => {
+    /*toggleNavigation = (event) => {
         let target = event.target;
 
         while(target !== this) {
@@ -115,7 +118,7 @@ export class Todo extends React.Component {
         }
 
     };
-
+*/
 
 
 
@@ -125,8 +128,8 @@ export class Todo extends React.Component {
                 <h2>TODO APP</h2>
                 <input onChange={this.handleChange} className="input" id="input" onKeyUp={this.handleEnter} />
                 <button onClick={this.handleClick} className="addButton" id="addButton">Add</button>
-                <div className="todoList">{
-                    this.state.todoArray.filter( (item) => {
+                {/*<div className="todoList">{
+                    this.props.testStore.filter( (item) => {
                         if(this.state.all === false) {
                             return item.done === this.state.status
                         }else{
@@ -153,7 +156,7 @@ export class Todo extends React.Component {
                                 </div>
                             </div>
                         }})
-                }</div>
+                }</div>*/}
                 <div className="navigation" onClick={this.toggleNavigation}>
                     <p className="currentTodos" onClick={() => {
                         this.showCurrentTodos();
@@ -179,9 +182,9 @@ export class Todo extends React.Component {
 
 export default connect(
     state => ({
-        testStore: state
+        store: state
     }),
     dispatch => bindActionCreators({
-        ...actions
+        addTodo: addTodo
     }, dispatch)
 )(Todo);

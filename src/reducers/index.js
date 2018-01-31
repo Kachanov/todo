@@ -4,7 +4,7 @@ const initialState = {
 };
 
 export function todoList(state = initialState, action) {
-    if(action.type === "ADD_TODO"){
+    if(action.type === "ADD_TODO") {
         return {
             ...state,
             todoArray: [
@@ -12,10 +12,10 @@ export function todoList(state = initialState, action) {
                 {
                     value: action.payload,
                     done: false,
-                    id: 0
+                    id: state.todoArray.length
                 }
             ]
-        };
+        }
     }
 
     return state;
