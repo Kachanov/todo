@@ -73,7 +73,9 @@ export class Todo extends React.Component {
         return <div>{item.value}</div>
     };
 
-    /*toggleNavigation = (event) => {
+    toggleNavigation = (event) => {
+        const navigationPanel = document.getElementById("navigation")
+        let selectedItem;
         let target = event.target;
 
         while(target !== this) {
@@ -93,7 +95,6 @@ export class Todo extends React.Component {
         }
 
     };
-*/
 
 
 
@@ -105,22 +106,8 @@ export class Todo extends React.Component {
                 <input onChange={this.handleChange} className="input" id="input" onKeyUp={this.handleEnter} />
                 <button onClick={this.handleClick} className="addButton" id="addButton">Add</button>
                 <div className="todoList">{
-                    this.props.store.todoArray.filter( (item) => {
-                        //return item.done === this.props.store.currentFilter
-                        if(this.props.store.currentFilter === "current") {
-                            return item.done === false;
-                        }
-
-                        if(this.props.store.currentFilter === "done") {
-                            return item.done === true;
-                        }
-
-                        if(this.props.store.currentFilter === "all") {
-                            return item.done === false || item.done === true
-                        }
-
-                        }
-                    ).map( (item) => {
+                    this.props.store.todoArray.filter(this.props.store.currentFilter)
+                        .map( (item) => {
                         if(item.done === true){
                             return <div className="crossOut">{this.showTodo(item)}</div>
                         }else{
@@ -141,7 +128,7 @@ export class Todo extends React.Component {
                             </div>
                         }})
                 }</div>
-                <div className="navigation" onClick={this.toggleNavigation}>
+                <div className="navigation" id="navigation" onClick={this.toggleNavigation}>
                     <p className="currentTodos" onClick={() => {
                         this.showCurrentTodos();
                     }}>

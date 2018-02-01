@@ -1,7 +1,23 @@
-const initialState = {
-    todoArray: [],
-    currentFilter: "current"
-};
+const initialState = (function () {
+    const filters = [
+        function (item) {
+            return item.done === false;
+        },
+        function (item) {
+            return item.done === true;
+        },
+        function () {
+            return true
+        }
+    ];
+
+    return {
+        todoArray: [],
+        filters,
+        currentFilter: filters[0]
+    }
+
+})();
 
 export function todoList(state = initialState, action) {
     if(action.type === "ADD_TODO") {
@@ -38,7 +54,7 @@ export function todoList(state = initialState, action) {
     }
 
     if(action.type === "SHOW_DONE") {
-        state.currentFilter = "done";
+        state.currentFilter = state.filters[1];
 
         return {
             ...state, currentFilter: state.currentFilter
@@ -46,7 +62,7 @@ export function todoList(state = initialState, action) {
     }
 
     if(action.type === "SHOW_CURRENT") {
-        state.currentFilter = "current";
+        state.currentFilter = state.filters[0];
 
         return {
             ...state, currentFilter: state.currentFilter
@@ -54,7 +70,7 @@ export function todoList(state = initialState, action) {
     }
 
     if(action.type === "SHOW_ALL") {
-        state.currentFilter = "all";
+        state.currentFilter = state.filters[2];
 
         return {
             ...state, currentFilter: state.currentFilter

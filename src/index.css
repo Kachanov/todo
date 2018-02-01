@@ -54,7 +54,7 @@ h2 {
   box-shadow: 0 3px rgb(33,147,90) inset;
 }
 
-h2{
+h2 {
   font-family: 'Courgette', cursive;
   font-size: 50pt;
   margin-left: 20px;
@@ -82,7 +82,7 @@ h2{
   white-space: nowrap;
 }
 
-.todoControlButtons{
+.todoControlButtons {
   display: flex;
   flex-direction: row;
   justify-content: center;
