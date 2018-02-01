@@ -4,17 +4,11 @@ import {connect} from "react-redux";
 import {addTodo} from "../actions/todo.action";
 import {deleteTodo} from "../actions/todo.action";
 import {doneTodo} from "../actions/todo.action";
+import {showDone} from "../actions/todo.action";
+import {showCurrent} from "../actions/todo.action";
+import {showAll} from "../actions/todo.action";
 
 export class Todo extends React.Component {
-
-    componentDidMount() {
-        console.log("componentWillMount")
-    }
-
-    componentWillUnmount() {
-        console.log("componentWillUnmount")
-    }
-
 
     constructor(props) {
         super(props);
@@ -58,27 +52,17 @@ export class Todo extends React.Component {
         console.log(this.props.store);
     };
 
-    /*
     showCurrentTodos = () => {
-        this.setState({
-            status: false,
-            all: false
-        });
+        this.props.showCurrent();
     };
 
     showDoneTodos = () => {
-        this.setState({
-            status: true,
-            all: false
-        });
-
+        this.props.showDone();
     };
 
     showAllTodos = () => {
-        this.setState({
-            all: true
-        });
-    };*/
+        this.props.showAll();
+    };
 
     showTodo = (item) => {
         const maxLength = 18;
@@ -122,19 +106,26 @@ export class Todo extends React.Component {
                 <button onClick={this.handleClick} className="addButton" id="addButton">Add</button>
                 <div className="todoList">{
                     this.props.store.todoArray.filter( (item) => {
-                        if(this.state.all === false) {
-                            return item.done === this.state.status
-                        }else{
-                            console.log(this.state.all);
-                            return item.done === true || item.done === false
+                        //return item.done === this.props.store.currentFilter
+                        if(this.props.store.currentFilter === "current") {
+                            return item.done === false;
                         }
-                    }).map( (item) => {
+
+                        if(this.props.store.currentFilter === "done") {
+                            return item.done === true;
+                        }
+
+                        if(this.props.store.currentFilter === "all") {
+                            return item.done === false || item.done === true
+                        }
+
+                        }
+                    ).map( (item) => {
                         if(item.done === true){
                             return <div className="crossOut">{this.showTodo(item)}</div>
                         }else{
                             return <div className="todoItem" key={item.id} id="todoItem">
                                 {this.showTodo(item)}
-                                    {this.componentDidMount()}
                                 <div className="todoControlButtons">
                                     <div className="readyButton" onClick={() => {
                                         this.handleReady(item);
@@ -143,7 +134,6 @@ export class Todo extends React.Component {
                                     </div>
                                     <div className="deleteButton" onClick={() => {
                                         this.handleDelete(item);
-                                        this.componentWillUnmount();
                                     }}>
                                         X
                                     </div>
@@ -181,6 +171,9 @@ export default connect(
     dispatch => bindActionCreators({
         addTodo: addTodo,
         deleteTodo: deleteTodo,
-        doneTodo: doneTodo
+        doneTodo: doneTodo,
+        showDone: showDone,
+        showCurrent: showCurrent,
+        showAll: showAll
     }, dispatch)
 )(Todo);

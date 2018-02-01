@@ -1,6 +1,6 @@
 const initialState = {
     todoArray: [],
-    currentFilter: []
+    currentFilter: "current"
 };
 
 export function todoList(state = initialState, action) {
@@ -34,6 +34,30 @@ export function todoList(state = initialState, action) {
 
         return {
             ...state, todoArray: [...state.todoArray]
+        }
+    }
+
+    if(action.type === "SHOW_DONE") {
+        state.currentFilter = "done";
+
+        return {
+            ...state, currentFilter: state.currentFilter
+        }
+    }
+
+    if(action.type === "SHOW_CURRENT") {
+        state.currentFilter = "current";
+
+        return {
+            ...state, currentFilter: state.currentFilter
+        }
+    }
+
+    if(action.type === "SHOW_ALL") {
+        state.currentFilter = "all";
+
+        return {
+            ...state, currentFilter: state.currentFilter
         }
     }
 
