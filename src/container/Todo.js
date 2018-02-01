@@ -10,11 +10,6 @@ import {showAll} from "../actions/todo.action";
 
 export class Todo extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {item: props.value, todoArray: props.store.todoArray, currentFilter: props.store.currentFilter, status: false, all: false};
-    }
-
     handleChange = (event) => {
         event.target.value.toUpperCase();
     };
@@ -26,7 +21,6 @@ export class Todo extends React.Component {
         }
 
         input.value = "";
-        console.log(this.props.store);
     }
 
     handleClick = (event) => {
@@ -42,14 +36,12 @@ export class Todo extends React.Component {
     handleDelete = (item) => {
         let index = item.id;
         this.props.deleteTodo(index);
-        console.log(this.props.store);
     };
 
 
     handleReady = (item) => {
         const index = item.id;
         this.props.doneTodo(index);
-        console.log(this.props.store);
     };
 
     showCurrentTodos = () => {
@@ -99,7 +91,7 @@ export class Todo extends React.Component {
 
 
     render() {
-        console.log("RENDER");
+        console.log(this.props.store.todoArray);
         return(
             <div>
                 <h2>TODO APP</h2>
@@ -109,7 +101,7 @@ export class Todo extends React.Component {
                     this.props.store.todoArray.filter(this.props.store.currentFilter)
                         .map( (item) => {
                         if(item.done === true){
-                            return <div className="crossOut">{this.showTodo(item)}</div>
+                            return <div className="crossOut" key={item.id}>{this.showTodo(item)}</div>
                         }else{
                             return <div className="todoItem" key={item.id} id="todoItem">
                                 {this.showTodo(item)}
