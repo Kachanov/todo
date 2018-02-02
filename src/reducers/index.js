@@ -1,3 +1,5 @@
+import React from "react";
+
 const initialState = (function () {
     const filters = [
         function (item) {
@@ -18,6 +20,9 @@ const initialState = (function () {
     }
 
 })();
+
+
+
 
 export function todoList(state = initialState, action) {
     switch (action.type) {
@@ -73,6 +78,8 @@ export function todoList(state = initialState, action) {
             return {
                 ...state, currentFilter: state.currentFilter
             };
+
+
         default:
             return state;
     }

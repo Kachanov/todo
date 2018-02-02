@@ -8,7 +8,30 @@ import {showDone} from "../actions/todo.action";
 import {showCurrent} from "../actions/todo.action";
 import {showAll} from "../actions/todo.action";
 
+
+
 export class Todo extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.navButtons = [
+            <p className="currentTodos" onClick={() => {
+                this.showCurrentTodos();
+            }}>
+                CURRENT
+            </p>,
+            <p className="doneTodos" onClick={() => {
+                this.showDoneTodos();
+            }}>
+                DONE
+            </p>,
+            <p className="allTodos" onClick={() => {
+                this.showAllTodos();
+            }}>
+                ALL
+            </p>
+        ];
+    }
 
     handleChange = (event) => {
         event.target.value.toUpperCase();
@@ -55,6 +78,7 @@ export class Todo extends React.Component {
     showAllTodos = () => {
         this.props.showAll();
     };
+
 
     showTodo = (item) => {
         const maxLength = 18;
@@ -121,21 +145,11 @@ export class Todo extends React.Component {
                         }})
                 }</div>
                 <div className="navigation" id="navigation" onClick={this.toggleNavigation}>
-                    <p className="currentTodos" onClick={() => {
-                        this.showCurrentTodos();
-                    }}>
-                        CURRENT
-                    </p>
-                    <p className="doneTodos" onClick={() => {
-                        this.showDoneTodos();
-                    }}>
-                        DONE
-                    </p>
-                    <p className="allTodos" onClick={() => {
-                        this.showAllTodos();
-                    }}>
-                        ALL
-                    </p>
+                    {this.navButtons.map((button) => {
+                        console.log(button);
+                        return button
+                    })}
+
                 </div>
             </div>
         );
