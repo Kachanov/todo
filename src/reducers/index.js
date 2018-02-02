@@ -1,14 +1,14 @@
 import React from "react";
 
-const initialState = (function () {
+export const initialState = (function () {
     const filters = [
-        function (item) {
+        function currentTodos(item) {
             return item.done === false;
         },
-        function (item) {
+        function doneTodos(item) {
             return item.done === true;
         },
-        function () {
+        function allTodos() {
             return true
         }
     ];
@@ -24,7 +24,7 @@ const initialState = (function () {
 
 
 
-export function todoList(state = initialState, action) {
+export function todoList(state = {...initialState}, action) {
     switch (action.type) {
         case "ADD_TODO":
             return {
@@ -63,6 +63,12 @@ export function todoList(state = initialState, action) {
 
             return {
                 ...state, currentFilter: state.currentFilter
+            };
+
+        case "SET_CURRENT_FILTER":
+            return {
+                ...state, currentFilter: state.filters[action.payload],
+                currentFilterNumber: action.payload
             };
 
         case "SHOW_CURRENT":

@@ -8,24 +8,28 @@ import {showDone} from "../actions/todo.action";
 import {showCurrent} from "../actions/todo.action";
 import {showAll} from "../actions/todo.action";
 
-
-
 export class Todo extends React.Component {
+
+    componentWillReceiveProps(nextProps) {
+        if  (nextProps.currentFilter) {
+
+        }
+    }
 
     constructor(props) {
         super(props);
         this.navButtons = [
-            <p className="currentTodos" onClick={() => {
+            <p className="currentTodos" id="currentTodos" onClick={() => {
                 this.showCurrentTodos();
             }}>
                 CURRENT
             </p>,
-            <p className="doneTodos" onClick={() => {
+            <p className="doneTodos" id="doneTodos" onClick={() => {
                 this.showDoneTodos();
             }}>
                 DONE
             </p>,
-            <p className="allTodos" onClick={() => {
+            <p className="allTodos" id="allTodos" onClick={() => {
                 this.showAllTodos();
             }}>
                 ALL
@@ -89,7 +93,7 @@ export class Todo extends React.Component {
         return <div>{item.value}</div>
     };
 
-    toggleNavigation = (event) => {
+    /*toggleNavigation = (event) => {
         const navigationPanel = document.getElementById("navigation")
         let selectedItem;
         let target = event.target;
@@ -110,7 +114,7 @@ export class Todo extends React.Component {
             selectedItem.classList.add("highlight");
         }
 
-    };
+    };*/
 
 
 
@@ -144,9 +148,15 @@ export class Todo extends React.Component {
                             </div>
                         }})
                 }</div>
-                <div className="navigation" id="navigation" onClick={this.toggleNavigation}>
-                    {this.navButtons.map((button) => {
-                        console.log(button);
+                <div className="navigation" id="navigation">
+                    {this.navButtons.map( (button) => {
+                        //console.log(initialState.currentFilter.name);
+                        //console.log(this.props.store.currentFilter.name);
+                        console.log(button.props.className);
+                        if(this.props.store.currentFilter.name === button.props.className){
+                            //button.props.className.classList.add("highlight");
+                            console.log(this.props.store.currentFilter.name);
+                        }
                         return button
                     })}
 
