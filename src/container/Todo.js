@@ -10,15 +10,9 @@ import {showAll} from "../actions/todo.action";
 
 export class Todo extends React.Component {
 
-    componentWillReceiveProps(nextProps) {
-        if  (nextProps.currentFilter) {
-
-        }
-    }
-
     constructor(props) {
         super(props);
-        this.navButtons = [
+        /*this.navButtons = [
             <p className="currentTodos" id="currentTodos" onClick={() => {
                 this.showCurrentTodos();
             }}>
@@ -34,6 +28,23 @@ export class Todo extends React.Component {
             }}>
                 ALL
             </p>
+        ];*/
+        this.navButtons = [
+            {
+                className: "currentTodos",
+                title: "CURRENT",
+                onClick: this.showCurrentTodos
+            },
+            {
+                className: "doneTodos",
+                title: "DONE",
+                onClick: this.showDoneTodos
+            },
+            {
+                className: "allTodos",
+                title: "ALL",
+                onClick: this.showAllTodos
+            }
         ];
     }
 
@@ -150,14 +161,11 @@ export class Todo extends React.Component {
                 }</div>
                 <div className="navigation" id="navigation">
                     {this.navButtons.map( (button) => {
-                        //console.log(initialState.currentFilter.name);
-                        //console.log(this.props.store.currentFilter.name);
-                        console.log(button.props.className);
-                        if(this.props.store.currentFilter.name === button.props.className){
-                            //button.props.className.classList.add("highlight");
-                            console.log(this.props.store.currentFilter.name);
+                        if(this.props.store.currentFilter.name === button.className){
+                            return <p className={[button.className, "highlight"].join(" ")} onClick={button.onClick} >{button.title}</p>
                         }
-                        return button
+
+                        return <p className={button.className} onClick={button.onClick}>{button.title}</p>
                     })}
 
                 </div>
