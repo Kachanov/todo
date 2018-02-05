@@ -12,23 +12,6 @@ export class Todo extends React.Component {
 
     constructor(props) {
         super(props);
-        /*this.navButtons = [
-            <p className="currentTodos" id="currentTodos" onClick={() => {
-                this.showCurrentTodos();
-            }}>
-                CURRENT
-            </p>,
-            <p className="doneTodos" id="doneTodos" onClick={() => {
-                this.showDoneTodos();
-            }}>
-                DONE
-            </p>,
-            <p className="allTodos" id="allTodos" onClick={() => {
-                this.showAllTodos();
-            }}>
-                ALL
-            </p>
-        ];*/
         this.navButtons = [
             {
                 className: "currentTodos",
@@ -94,7 +77,6 @@ export class Todo extends React.Component {
         this.props.showAll();
     };
 
-
     showTodo = (item) => {
         const maxLength = 18;
 
@@ -103,30 +85,6 @@ export class Todo extends React.Component {
         }
         return <div>{item.value}</div>
     };
-
-    /*toggleNavigation = (event) => {
-        const navigationPanel = document.getElementById("navigation")
-        let selectedItem;
-        let target = event.target;
-
-        while(target !== this) {
-            if(target.tagName === "P") {
-                highlight(target);
-                return;
-            }
-            target = target.parentNode;
-        }
-
-        function highlight(node) {
-            if(selectedItem) {
-                selectedItem.classList.remove("highlight");
-            }
-            selectedItem = node;
-            selectedItem.classList.add("highlight");
-        }
-
-    };*/
-
 
 
     render() {
@@ -162,7 +120,7 @@ export class Todo extends React.Component {
                 <div className="navigation" id="navigation">
                     {this.navButtons.map( (button) => {
                         if(this.props.store.currentFilter.name === button.className){
-                            return <p className={[button.className, "highlight"].join(" ")} onClick={button.onClick} >{button.title}</p>
+                            return <p className={[button.className, "highlight"].join(" ")} onClick={button.onClick}>{button.title}</p>
                         }
 
                         return <p className={button.className} onClick={button.onClick}>{button.title}</p>
