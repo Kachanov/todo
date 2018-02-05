@@ -120,10 +120,10 @@ export class Todo extends React.Component {
                 <div className="navigation" id="navigation">
                     {this.navButtons.map( (button) => {
                         if(this.props.store.currentFilter.name === button.className){
-                            return <p className={[button.className, "highlight"].join(" ")} onClick={button.onClick}>{button.title}</p>
+                            return <p className={[button.className, "highlight"].join(" ")} onClick={button.onClick} key={button.className}>{button.title}</p>
                         }
 
-                        return <p className={button.className} onClick={button.onClick}>{button.title}</p>
+                        return <p className={button.className} onClick={button.onClick} key={button.className}>{button.title}</p>
                     })}
 
                 </div>
