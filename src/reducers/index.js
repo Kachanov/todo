@@ -82,7 +82,16 @@ export function todoList(state = {...initialState}, action) {
             return {
                 ...state, currentFilter: state.currentFilter
             };
+        case "REQUEST":
+            return state;
 
+        case "SUCCESS":
+            console.log(action);
+            return state;
+
+        case "FAILURE":
+            console.log(action);
+            return state;
 
         default:
             return state;

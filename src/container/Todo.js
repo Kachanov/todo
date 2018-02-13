@@ -6,7 +6,8 @@ import {deleteTodo} from "../actions/todo.action";
 import {doneTodo} from "../actions/todo.action";
 import {showDone} from "../actions/todo.action";
 import {showCurrent} from "../actions/todo.action";
-import {showAll} from "../actions/todo.action";
+import {showAll, request} from "../actions/todo.action";
+
 
 export class Todo extends React.Component {
 
@@ -29,6 +30,10 @@ export class Todo extends React.Component {
                 onClick: this.showAllTodos
             }
         ];
+    }
+
+    componentDidMount() {
+        this.props.request();
     }
 
     handleChange = (event) => {
@@ -143,6 +148,7 @@ export default connect(
         doneTodo: doneTodo,
         showDone: showDone,
         showCurrent: showCurrent,
-        showAll: showAll
+        showAll: showAll,
+        request
     }, dispatch)
 )(Todo);
