@@ -9,13 +9,6 @@ h2 {
   margin-bottom: 20px;
 }
 
-/*@font-face {
-  font-family: "Courgette-Regular";
-  src: url("./font/Courgette-Regular.ttf") format("truetype");
-  font-style: normal;
-  font-weight: normal;
-}*/
-
 .input {
   font-family: 'Courgette', cursive;
   font-size: 20pt;
@@ -45,6 +38,7 @@ h2 {
   padding-top: 7px;
 
 }
+
 .addButton:hover {
   background: rgb(53, 167, 110);
 }
@@ -54,7 +48,7 @@ h2 {
   box-shadow: 0 3px rgb(33,147,90) inset;
 }
 
-h2{
+h2 {
   font-family: 'Courgette', cursive;
   font-size: 50pt;
   margin-left: 20px;
@@ -82,7 +76,7 @@ h2{
   white-space: nowrap;
 }
 
-.todoControlButtons{
+.todoControlButtons {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -120,19 +114,14 @@ h2{
   font-size: 18pt;
   color: red;
   user-select: none;
-}
-
-.currentTodos {
   cursor: pointer;
 }
 
 .doneTodos {
-  cursor: pointer;
   margin-left: 20px;
 }
 
 .allTodos {
-  cursor: pointer;
   margin-left: 20px;
 }
 
@@ -152,5 +141,7 @@ h2{
 }
 
 .highlight {
-  text-decoration: underline red;
+  /*text-decoration: underline red;*/
+  font-weight: bold;
+  font-size: 19pt;
 }
