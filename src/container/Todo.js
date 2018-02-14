@@ -1,12 +1,7 @@
 import React from "react";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
-import {addTodo} from "../actions/todo.action";
-import {deleteTodo} from "../actions/todo.action";
-import {doneTodo} from "../actions/todo.action";
-import {showDone} from "../actions/todo.action";
-import {showCurrent} from "../actions/todo.action";
-import {showAll, request} from "../actions/todo.action";
+import {showAll, request, showCurrent, showDone, doneTodo, deleteTodo, addTodo} from "../actions/todo.action";
 
 
 export class Todo extends React.Component {

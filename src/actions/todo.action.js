@@ -22,9 +22,8 @@ export function showAll() {
     return {type: "SHOW_ALL"}
 }
 
-
 export function request() {
-    const url = "http://www.json-generator.com/api/json/get/cdZvBAV8NKa?indent=2";
+    const url = "http://www.json-generator.com/api/json/get/cdZvBAVNKa?indent=2";
 
     return {type: "GET_TODO", url}
 }
