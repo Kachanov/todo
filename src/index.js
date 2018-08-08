@@ -7,7 +7,6 @@ import {todoList} from "./reducers";
 import './index.css';
 
 const middleware = (store) => (next) => (action) => {
-    console.log(action.type);
     if(action.url) {
         next({type: 'REQUEST'});
 
